@@ -10,6 +10,8 @@ import cors from 'cors';
 import MySQL from './db';
 
 import { testRoutes } from '../routes/test.route';
+import { userRoutes } from '../routes/user.route';
+import { adminRoutes } from '../routes/admin.route';
 
 
 /**
@@ -61,7 +63,9 @@ const initDbConfigs = () => {
 * @desc - initialize the all sever routes (REST end points);
 */
 const initializeServerRoutes = (app: Application, io: socketDotIO.Server) => {
-  testRoutes(app, io); // setting up user routes
+  testRoutes(app, io); 
+  userRoutes(app, io);
+  adminRoutes(app, io);// setting up user routes
 }
 
 const setupSocketio = (io: socketDotIO.Server) => {
