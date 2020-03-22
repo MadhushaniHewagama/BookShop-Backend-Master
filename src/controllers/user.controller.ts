@@ -50,7 +50,7 @@ import { FieldInfo, MysqlError } from "mysql";
  export const addProfilePic=(req: Request, res: Response) => {
    // Example query that you can execute to get all the users from database
   console.log("pic:::"+JSON.stringify(req.body))
-   const update_user_query = "update users(`profile_pic`=?) where `email`=?";
+   const update_user_query = "update users set profile_pic=? where `email`=?";
 
    Mysql.getPool().query(update_user_query, [req.body.profile_pic,req.body.email],(err:any, results:any) =>
       {if (err) {
