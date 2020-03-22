@@ -1,13 +1,14 @@
+drop database bookshop;
 create database bookshop;
 use bookshop;
 create table users(
 	email varchar(50) primary key,
     name varchar(50),
-    address varchar(50) not null,
+    address varchar(50) ,
     tel varchar(10),
-    pwd varchar(50),
-    privilege boolean,
-    profile_pic blob
+    pwd varchar(50) not null,
+    privilege boolean default 0,
+    profile_pic longblob
 ); 
 create table books(
 	bookID integer primary key,
