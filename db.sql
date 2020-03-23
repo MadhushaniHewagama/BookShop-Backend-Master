@@ -12,15 +12,16 @@ create table users(
 ); 
 create table books(
 	bookID integer primary key,
+    title varchar(50),
     ISBN varchar(50),
-    name varchar(50),
     author varchar(50),
-    language varchar(20),
+    buying_price DOUBLE,
+    selling_price DOUBLE,
     category varchar(20),
-    buying_price double,
-    selling_price double,
     quantity integer,
-    discount double
+    discount double,
+    description VARCHAR(100),
+    book_pic longblob
 );
 create table rates(
 	rateID integer primary key,
