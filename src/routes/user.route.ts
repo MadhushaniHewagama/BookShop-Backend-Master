@@ -10,6 +10,6 @@ export const userRoutes = (app: Application, io: SocketIO.Server) => {
   .post(addUser)
   .put(updateUser);
 
-  app.route('/api/v1/user/profile_pic')
+  app.route('/api/v1/user/:email/profile')
   .put(addProfilePic);
 }//test commit

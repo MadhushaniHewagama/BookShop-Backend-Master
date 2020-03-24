@@ -8,10 +8,10 @@ create table users(
     tel varchar(10),
     pwd varchar(50) not null,
     privilege boolean default 0,
-    profile_pic longblob
+    profile_pic text
 ); 
 create table books(
-	bookID integer primary key,
+	bookID integer primary key auto_increment,
     title varchar(50),
     ISBN varchar(50),
     author varchar(50),
@@ -21,10 +21,10 @@ create table books(
     quantity integer,
     discount double,
     description VARCHAR(100),
-    book_pic longblob
+    book_pic text
 );
 create table rates(
-	rateID integer primary key,
+	rateID integer primary key auto_increment,
     bookID integer,
     email varchar(50),
     rate_value integer,
@@ -32,7 +32,7 @@ create table rates(
     foreign key(email) references users(email)    
 );
 create table cart(
-	cartID integer primary key,
+	cartID integer primary key auto_increment,
     bookID integer,
     quantity integer,
     email varchar(50),
@@ -40,7 +40,7 @@ create table cart(
     foreign key(email) references users(email)        
 );
 create table orders(
-	order_id integer primary key,
+	order_id integer primary key auto_increment,
     date Date,
     cartID integer,
     foreign key(cartID) references cart(cartID)    
