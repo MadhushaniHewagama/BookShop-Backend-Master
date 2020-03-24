@@ -19,7 +19,7 @@ export const addBook=(req:Request, res:Response) => {
 
 export const getBook= (req: Request, res: Response) => {
 
-    const get_book_query = "select title, ISBN, author, buying_price, category, discount, description where bookID = ?";
+    const get_book_query = "select title, ISBN, author, buying_price, category, discount, description, book_pic where bookID = ?";
 
     Mysql.getPool().query(get_book_query, [req.query.bookID], (err:any, results: any) => {
         if(err){
