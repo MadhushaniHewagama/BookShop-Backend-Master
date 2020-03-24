@@ -80,4 +80,20 @@ export const addProfilePic = (req: Request, res: Response) => {
    );
 }
 
+export const getBook= (req: Request, res: Response) => {
+
+   const get_book_query = "select title, ISBN, author, selling_price, category, discount, description, book_pic, quantity from books where bookID = ?";
+
+   Mysql.getPool().query(get_book_query, [req.query.bookID], (err:any, results: any) => {
+       if(err){
+           console.log("Error", err);
+           res.status(500)
+              .json({ "error": err });
+       }else{
+           console.log("Result: ", results);
+           res.json(results);
+       }
+   });
+
+}
 
