@@ -4,7 +4,7 @@ import { Application, Request, Response } from "express";
 export const addBook=(req:Request, res:Response) => {
 
     const add_book_query = "insert into books (`title`, `ISBN`, `author`, `buying_price`, `selling_price`, `category`, `quantity`, `discount`, `description`,`book_pic`) values (?,?,?,?,?,?,?,?,?,?)";
-    MySQL.getPool().query(add_book_query, [req.body.title, req.body.ISBN, req.body.author, req.body.buying_price, req.body.selling_price, req.body.category, req.body.quantity, req.body.discount, req.body.description, req.body.book_pic],(err:any, results:any) => {
+    Mysql.getPool().query(add_book_query, [req.body.title, req.body.ISBN, req.body.author, req.body.buying_price, req.body.selling_price, req.body.category, req.body.quantity, req.body.discount, req.body.description, req.body.book_pic],(err:any, results:any) => {
         if(err){
             console.log("Error", err);
             res.status(500)
