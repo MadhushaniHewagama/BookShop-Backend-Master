@@ -14,12 +14,12 @@ export const addBook=(req:Request, res:Response) => {
             res.json(results);
         }
     });
-
 }
 
 export const getBook= (req: Request, res: Response) => {
 
     const get_book_query = "select title, ISBN, author, buying_price,selling_price, category, discount, description, book_pic,quantity from books where bookID = ?";
+
 
     Mysql.getPool().query(get_book_query, [req.query.bookID], (err:any, results: any) => {
         if(err){
@@ -53,7 +53,6 @@ export const updateBook = (req: Request, res: Response) => {
 export const deleteBook= (req: Request, res: Response) => {
 
     const get_book_query = "delete from books where bookID = ?";
-console.log("jhse>>>>>>"+req.body.bookID)
     Mysql.getPool().query(get_book_query, [req.query.bookID], (err:any, results: any) => {
         if(err){
             console.log("Error", err);
