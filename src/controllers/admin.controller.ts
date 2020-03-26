@@ -19,7 +19,7 @@ export const addBook=(req:Request, res:Response) => {
 
 export const getBook= (req: Request, res: Response) => {
 
-    const get_book_query = "select title, ISBN, author, buying_price, category, discount, description, book_pic where bookID = ?";
+    const get_book_query = "select title, ISBN, author, buying_price, category, discount, description, book_pic from books where bookID = ?";
 
     Mysql.getPool().query(get_book_query, [req.query.bookID], (err:any, results: any) => {
         if(err){
@@ -33,3 +33,21 @@ export const getBook= (req: Request, res: Response) => {
     });
 
 }
+
+
+// export const deleteBook= (req: Request, res: Response) => {
+
+//     const get_book_query = "delete from books where bookID = ?";
+
+//     Mysql.getPool().query(get_book_query, [req.query.bookID], (err:any, results: any) => {
+//         if(err){
+//             console.log("Error", err);
+//             res.status(500)
+//                .json({ "error": err });
+//         }else{
+//             console.log("Result: ", results);
+//             res.json(results);
+//         }
+//     });
+
+// }
