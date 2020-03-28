@@ -97,3 +97,35 @@ export const getBook= (req: Request, res: Response) => {
 
 }
 
+export const getOrderList = (req: Request, res: Response) => {
+   const get_order_list_query = "select  b.title,c.quantity,c.date_time,b.selling_price from cart_product c left outer join books b on c.bookID=b.bookID  where c.email=? and c.status=1 order by c.date_time desc";
+
+   Mysql.getPool().query(get_order_list_query, [req.params.email], (err:any, results: any) => {
+       if(err){
+           console.log("Error", err);
+           res.status(500)
+              .json({ "error": err });
+       }else{
+           console.log("Result: ", results);
+           res.json(results);
+       }
+   });
+
+}
+
+export const getPaymentList = (req: Request, res: Response) => {
+   const get_order_list_query = "select total_price,date from payment where email=? order by date desc";
+
+   Mysql.getPool().query(get_order_list_query, [req.params.email], (err:any, results: any) => {
+       if(err){
+           console.log("Error", err);
+           res.status(500)
+              .json({ "error": err });
+       }else{
+           console.log("Result: ", results);
+           res.json(results);
+       }
+   });
+
+}
+

@@ -34,6 +34,7 @@ export const getBook= (req: Request, res: Response) => {
 
 }
 
+
 export const updateBook = (req: Request, res: Response) => {
     console.log("pic:::" + JSON.stringify(req.body))
     // Example query that you can execute to get all the users from database
@@ -52,8 +53,24 @@ export const updateBook = (req: Request, res: Response) => {
  }
 export const deleteBook= (req: Request, res: Response) => {
 
-    const get_book_query = "delete from books where bookID = ?";
-    Mysql.getPool().query(get_book_query, [req.query.bookID], (err:any, results: any) => {
+    const delete_book_query = "delete from books where bookID = ?";
+    Mysql.getPool().query(delete_book_query, [req.query.bookID], (err:any, results: any) => {
+        if(err){
+            console.log("Error", err);
+            res.status(500)
+               .json({ "error": err });
+        }else{
+            console.log("Result: ", results);
+            res.json(results);
+        }
+    });
+
+}
+
+export const getUser= (req: Request, res: Response) => {
+    const get_user_query = "select  u.name,u.address,u.tel,u.email,u.profile_pic,b.title,c.quantity,c.date_time,b.selling_price from cart_product c left outer join books b on c.bookID=b.bookID left outer join users u on c.email=u.email where c.status=1 and u.email=?";
+
+    Mysql.getPool().query(get_user_query, [req.params.email], (err:any, results: any) => {
         if(err){
             console.log("Error", err);
             res.status(500)
