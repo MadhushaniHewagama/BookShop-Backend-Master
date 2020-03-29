@@ -37,7 +37,7 @@ create table cart_product(
     quantity integer,
     email varchar(50),
     status boolean,
-    date_time datetime,
+    date_time datetime default current_timestamp,
     foreign key(bookID) references books(bookID),
     foreign key(email) references users(email)   
 );

@@ -129,3 +129,18 @@ export const getPaymentList = (req: Request, res: Response) => {
 
 }
 
+export const getCartItemList = (req: Request, res: Response) => {
+   const get_order_list_query = "select  c.cart_product_id,b.title,c.quantity,c.date_time,b.selling_price from cart_product c left outer join books b on c.bookID=b.bookID  where c.email=? and c.status=0 order by c.date_time desc"
+
+   Mysql.getPool().query(get_order_list_query, [req.params.email], (err:any, results: any) => {
+       if(err){
+           console.log("Error", err);
+           res.status(500)
+              .json({ "error": err });
+       }else{
+           console.log("Result: ", results);
+           res.json(results);
+       }
+   });
+
+}
