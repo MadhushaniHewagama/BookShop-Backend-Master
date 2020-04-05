@@ -82,3 +82,19 @@ export const getUser= (req: Request, res: Response) => {
     });
 
 }
+
+export const getUsers= (req: Request, res: Response) => {
+    const get_users_query = "select * from users ";
+
+    Mysql.getPool().query(get_users_query, [req.params.email], (err:any, results: any) => {
+        if(err){
+            console.log("Error", err);
+            res.status(500)
+               .json({ "error": err });
+        }else{
+            console.log("Result: ", results);
+            res.json(results);
+        }
+    });
+
+}
