@@ -12,6 +12,7 @@ import MySQL from './db';
 import { testRoutes } from '../routes/test.route';
 import { userRoutes } from '../routes/user.route';
 import { adminRoutes } from '../routes/admin.route';
+import { homeRoutes } from '../routes/home.route';
 
 
 /**
@@ -65,7 +66,8 @@ const initDbConfigs = () => {
 const initializeServerRoutes = (app: Application, io: socketDotIO.Server) => {
   testRoutes(app, io); 
   userRoutes(app, io);
-  adminRoutes(app, io);// setting up user routes
+  adminRoutes(app, io);
+  homeRoutes(app,io);
 }
 
 const setupSocketio = (io: socketDotIO.Server) => {
