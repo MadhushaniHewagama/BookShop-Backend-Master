@@ -24,5 +24,7 @@ export const userRoutes = (app: Application, io: SocketIO.Server) => {
   .get(getPaymentList);
 
   app.route('/api/v1/user/cart/:email')
-  .get(getCartItemList);
+  .get(getCartItemList)
+ 
+
 }//test commit

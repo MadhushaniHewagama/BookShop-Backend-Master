@@ -144,3 +144,38 @@ export const getCartItemList = (req: Request, res: Response) => {
    });
 
 }
+
+
+
+export const updateCartItemList = (req: Request, res: Response) => {
+   
+   const update_user_query = "update cart_product set quantity= ?,status=1 where cart_product_id=?";
+   Mysql.getPool().query(update_user_query, [req.body.quantity, req.body.cart_product_id], (err: any, results: any) => {
+      if (err) {
+         console.log("Error", err);
+         res.status(500)
+            .json({ "error": err });
+      } else {
+         console.log("Result: ", results);
+         res.json(results);
+      }
+   }
+   );
+}
+
+export const deleteCartItem = (req: Request, res: Response) => {
+  
+   const update_user_query = "delete from cart_product where cart_product_id=?";
+   Mysql.getPool().query(update_user_query, [req.query.cart_product_id], (err: any, results: any) => {
+      if (err) {
+         console.log("Error", err);
+         res.status(500)
+            .json({ "error": err });
+      } else {
+         console.log("Result: ", results);
+         res.json(results);
+      }
+   }
+   );
+}
+

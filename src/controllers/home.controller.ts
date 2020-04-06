@@ -18,7 +18,7 @@ import { FieldInfo, MysqlError } from "mysql";
 
 
   export const getCart = (req: Request, res: Response) => {
-    const get_user_query = "select b.title,c.quantity,b.selling_price from cart_product c left outer join books b on c.bookID=b.bookID where c.email=? and c.status='0'";
+    const get_user_query = "select c.cart_product_id, b.title,c.quantity,b.selling_price from cart_product c left outer join books b on c.bookID=b.bookID where c.email=? and c.status='0'";
     // Example query that you can execute to get all the users from database
     Mysql.getPool().query(get_user_query, [req.query.email], (err: any, results: any) => {
        if (err) {
@@ -62,3 +62,37 @@ import { FieldInfo, MysqlError } from "mysql";
     }
     );
  }
+
+ 
+export const updateCartItemList = (req: Request, res: Response) => {
+   
+   const update_user_query = "update cart_product set quantity= ?,status=1 where cart_product_id=?";
+   Mysql.getPool().query(update_user_query, [req.body.quantity, req.body.cart_product_id], (err: any, results: any) => {
+      if (err) {
+         console.log("Error", err);
+         res.status(500)
+            .json({ "error": err });
+      } else {
+         console.log("Result: ", results);
+         res.json(results);
+      }
+   }
+   );
+}
+
+export const deleteCartItem = (req: Request, res: Response) => {
+  
+   const update_user_query = "delete from cart_product where cart_product_id=?";
+   Mysql.getPool().query(update_user_query, [req.query.cart_product_id], (err: any, results: any) => {
+      if (err) {
+         console.log("Error", err);
+         res.status(500)
+            .json({ "error": err });
+      } else {
+         console.log("Result: ", results);
+         res.json(results);
+      }
+   }
+   );
+}
+
