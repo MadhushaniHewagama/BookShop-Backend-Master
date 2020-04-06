@@ -68,8 +68,8 @@ export const deleteBook= (req: Request, res: Response) => {
 }
 
 export const getUser= (req: Request, res: Response) => {
-    const get_user_query = "select  u.name,u.address,u.tel,u.email,u.profile_pic,b.title,c.quantity,c.date_time,b.selling_price from cart_product c left outer join books b on c.bookID=b.bookID left outer join users u on c.email=u.email where c.status=1 and u.email=?";
-
+    const get_user_query = "select  u.name,u.address,u.tel,u.email,u.profile_pic,b.title,c.quantity,c.date_time,b.selling_price from users u left outer join cart_product c on u.email=c.email left outer join books b on  c.bookID=b.bookID where  u.email=?";
+console.log("email::::"+req.params.email)
     Mysql.getPool().query(get_user_query, [req.params.email], (err:any, results: any) => {
         if(err){
             console.log("Error", err);
@@ -87,6 +87,22 @@ export const getUsers= (req: Request, res: Response) => {
     const get_users_query = "select * from users ";
 
     Mysql.getPool().query(get_users_query, [req.params.email], (err:any, results: any) => {
+        if(err){
+            console.log("Error", err);
+            res.status(500)
+               .json({ "error": err });
+        }else{
+            console.log("Result: ", results);
+            res.json(results);
+        }
+    });
+
+}
+
+export const getOrders= (req: Request, res: Response) => {
+    const get_users_query = "select  u.email,b.title,c.status,c.quantity,c.date_time,b.selling_price,(b.selling_price-b.buying_price) as profit from users u left outer join cart_product c on u.email=c.email left outer join books b on  c.bookID=b.bookID ; ";
+
+    Mysql.getPool().query(get_users_query, (err:any, results: any) => {
         if(err){
             console.log("Error", err);
             res.status(500)

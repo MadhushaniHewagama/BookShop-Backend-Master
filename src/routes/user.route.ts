@@ -15,14 +15,14 @@ export const userRoutes = (app: Application, io: SocketIO.Server) => {
   .put(addProfilePic);
 
   app.route('/api/v1/user/book')
-    .get(getBook)
+    .get(getBook);
 
   app.route('/api/v1/user/order/:email')
-    .get(getOrderList)
+    .get(getOrderList);
 
   app.route('/api/v1/user/payment/:email')
-  .get(getPaymentList)
+  .get(getPaymentList);
 
   app.route('/api/v1/user/cart/:email')
-  .get(getCartItemList)
+  .get(getCartItemList);
 }//test commit
